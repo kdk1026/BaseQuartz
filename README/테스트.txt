@@ -1,0 +1,8 @@
+* 파일 테스트 시
+	//@Configuration
+	public class DbQuartzConfiguration {
+
+
+* DB 테스트 시
+	//@Configuration
+	public class FileQuartzConfiguration {
