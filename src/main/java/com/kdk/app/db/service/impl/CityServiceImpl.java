@@ -41,7 +41,7 @@ public class CityServiceImpl implements CityService {
 	public void getAndRegisterCities() {
 		cityMapper.deleteCityBackAll();
 
-		int pagePerRow = 50;
+		int pagePerRow = 1000;
 
 		int totalCnt = cityMapper.selectCityTotalCnt();
 		int totalPages = (int) Math.ceil((double) totalCnt / pagePerRow);
