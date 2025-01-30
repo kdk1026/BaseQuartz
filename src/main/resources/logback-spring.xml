@@ -107,13 +107,6 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 		<appender-ref ref="Error"/>
 	</logger>
 
-	<!-- Batch -->
-	<logger name="org.springframework.batch.core" level="DEBUG" additivity="false">
-		<appender-ref ref="console"/>
-		<appender-ref ref="packageFile"/>
-		<appender-ref ref="Error"/>
-	</logger>
-
 	<root level="${PACKAGE_LEVEL}">
 		<appender-ref ref="console"/>
 	</root>
