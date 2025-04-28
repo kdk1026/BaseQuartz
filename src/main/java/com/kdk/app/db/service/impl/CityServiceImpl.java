@@ -59,7 +59,8 @@ public class CityServiceImpl implements CityService {
 
 			try ( SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false) ) {
 				for ( CityVo item : cities ) {
-					sqlSession.insert("com.kdk.app.db.mapper.CityMapper.insertCityBack", item);
+					CityMapper getCityMapper = sqlSession.getMapper(CityMapper.class);
+					getCityMapper.insertCityBack(item);
 				}
 
 				sqlSession.commit();
