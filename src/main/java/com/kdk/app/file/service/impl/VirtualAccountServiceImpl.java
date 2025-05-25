@@ -8,9 +8,9 @@ import java.util.List;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kdk.app.common.component.SpringBootProperty;
 import com.kdk.app.file.mapper.VirtualAccountMaper;
 import com.kdk.app.file.service.VirtualAccountService;
 import com.kdk.app.file.vo.VirtualAccountVo;
@@ -32,17 +32,21 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class VirtualAccountServiceImpl implements VirtualAccountService {
 
-	@Autowired
-	private VirtualAccountMaper virtualAccountMaper;
+	private final VirtualAccountMaper virtualAccountMaper;
+    private final SqlSessionFactory sqlSessionFactory;
+    private final SpringBootProperty springBootProperty;
 
-    @Autowired
-    private SqlSessionFactory sqlSessionFactory;
+	public VirtualAccountServiceImpl(VirtualAccountMaper virtualAccountMaper, SqlSessionFactory sqlSessionFactory, SpringBootProperty springBootProperty) {
+		this.virtualAccountMaper = virtualAccountMaper;
+		this.sqlSessionFactory = sqlSessionFactory;
+		this.springBootProperty = springBootProperty;
+	}
 
 	@Override
 	public void getAndRegisterVirtualAccounts() {
 		virtualAccountMaper.deleteVirtualAccount();
 
-		String filePath = "C:/test/acount.txt";
+		String filePath = springBootProperty.getProperty("file.virtual-account");
 		int rowsToRead = 10;
 
 		try ( BufferedReader br = new BufferedReader(new FileReader(filePath)) ) {

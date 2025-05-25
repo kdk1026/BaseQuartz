@@ -3,7 +3,6 @@ package com.kdk.app.file.scheduler;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kdk.app.file.service.VirtualAccountService;
 
@@ -23,8 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileQuartzJobLauncher implements Job {
 
-	@Autowired
-	private VirtualAccountService virtualAccountService;
+	private final VirtualAccountService virtualAccountService;
+
+	public FileQuartzJobLauncher(VirtualAccountService virtualAccountService) {
+		this.virtualAccountService = virtualAccountService;
+	}
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {

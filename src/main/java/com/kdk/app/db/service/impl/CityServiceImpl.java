@@ -7,7 +7,6 @@ import java.util.Map;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kdk.app.db.mapper.CityMapper;
@@ -31,11 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class CityServiceImpl implements CityService {
 
-	@Autowired
-	private CityMapper cityMapper;
+	private final CityMapper cityMapper;
+    private final SqlSessionFactory sqlSessionFactory;
 
-    @Autowired
-    private SqlSessionFactory sqlSessionFactory;
+	public CityServiceImpl(CityMapper cityMapper, SqlSessionFactory sqlSessionFactory) {
+		this.cityMapper = cityMapper;
+		this.sqlSessionFactory = sqlSessionFactory;
+	}
 
 	@Override
 	public void getAndRegisterCities() {

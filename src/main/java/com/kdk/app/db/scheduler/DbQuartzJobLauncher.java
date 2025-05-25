@@ -3,7 +3,6 @@ package com.kdk.app.db.scheduler;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kdk.app.db.service.CityService;
 
@@ -23,8 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DbQuartzJobLauncher implements Job {
 
-	@Autowired
-	private CityService cityService;
+	private final CityService cityService;
+
+	public DbQuartzJobLauncher(CityService cityService) {
+		this.cityService = cityService;
+	}
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
